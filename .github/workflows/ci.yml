@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  # masterブランチへのpushに対応する
+  push:
+    branches: ["master"]
+  # プルリクエストでのCIに対応する
+  pull_request:
+    types: [opened, synchronize]
+
+  # 手動での実行に対応する
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    # 実行ステップ
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 8.10.2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      # 依存関係のインストール
+      - name: install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # 型チェック
+      - name: typecheck
+        run: pnpm turbo typecheck
+
+      # ビルド
+      - name: build
+        run: pnpm turbo build
