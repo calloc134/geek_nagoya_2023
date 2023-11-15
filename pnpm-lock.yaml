@@ -21,7 +21,7 @@ importers:
         specifier: latest
         version: 1.10.16
 
-  apps/backend-2:
+  apps/backend:
     dependencies:
       '@nestjs/common':
         specifier: ^9.0.0
