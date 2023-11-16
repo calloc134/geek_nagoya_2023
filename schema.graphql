@@ -1,0 +1,8 @@
+type Query {
+  hello: hello_response
+}
+
+type hello_response {
+  url: String
+  message: String
+}
