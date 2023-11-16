@@ -32,11 +32,11 @@ on:
 
 env:
   AWS_REGION: ap-northeast-1 # set this to your preferred AWS region, e.g. us-west-1
-  ECR_REPOSITORY: geekNagoya2023 # set this to your Amazon ECR repository name
+  ECR_REPOSITORY: geek-nagoya2023 # set this to your Amazon ECR repository name
   ECS_SERVICE: geekNagoya2023-service # set this to your Amazon ECS service name
-  ECS_CLUSTER: geekNagoya2023-cluster # set this to your Amazon ECS cluster name
+  ECS_CLUSTER: geekNagoya2023 # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION:
-    task-definition.json # set this to the path to your Amazon ECS task definition
+    ../../apps/backend/task-definition.json # set this to the path to your Amazon ECS task definition
     # file, e.g. .aws/task-definition.json
   CONTAINER_NAME:
     geekNagoya2023-container # set this to the name of the container in the
@@ -66,12 +66,18 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
+      # Rewrite task-definition(秘密情報を注入する)
+      - name: rewrite task-definition
+        run: sed -i -e s/SED_TARGET_AWS_ACCOUNT_ID/${{ secrets.AWS_ACCOUNT_ID }}/g .aws/ecs/task-definition.json
+
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
+          # Change directory to the location of the Dockerfile
+          cd apps/backend
           # Build a docker container and
           # push it to ECR so that it can
           # be deployed to ECS.
@@ -83,7 +89,7 @@ jobs:
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: ${{ env.ECS_TASK_DEFINITION }}
+          task-definition: apps/backend/task-definition.json
           container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ steps.build-image.outputs.image }}
 
