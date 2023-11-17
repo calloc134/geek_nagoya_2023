@@ -39,7 +39,7 @@ const EffectImageBlock = () => {
           src={
             acceptedFiles[0]
               ? URL.createObjectURL(acceptedFiles[0])
-              : "https://picsum.photos/400"
+              : "https://pub-ff76be015fe2485bb8d12628f4d70b12.r2.dev/upload.png"
           }
           className={css({
             borderRadius: "xl",
