@@ -1,22 +1,30 @@
+import { useState } from 'react';
 import { useDropzone } from "react-dropzone";
 import { css } from "src/lib/styled-system/css";
 import { useImageFiles } from "src/utilities/useImageFiles";
+import { Trash, Reload } from "tabler-icons-react";
 
 const EffectImageBlock = () => {
-  const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
-    useDropzone({
-      accept: {
-        "image/*": [],
-      },
-      multiple: false,
-      onDrop: (acceptedFiles) => {
-        // ImageContextを使用するため呼び出し
-        setFile2(acceptedFiles[0]);
-      },
-    });
+  const defaultImageUrl = "https://pub-ff76be015fe2485bb8d12628f4d70b12.r2.dev/upload.png";
+  const [imageSrc, setImageSrc] = useState(defaultImageUrl);
+  const { getRootProps, getInputProps }
+  = useDropzone({
+    accept: {
+      "image/*": [],
+    },
+    multiple: false,
+    onDrop: (acceptedFiles) => {
+      setImageSrc(URL.createObjectURL(acceptedFiles[0]));
+      setFile2(acceptedFiles[0]);
+    },
+  });
 
-  // ImageContextを使用するため呼び出し
   const { setFile2 } = useImageFiles();
+
+  const handleRemoveFile = () => {
+    setFile2(null);
+    setImageSrc(defaultImageUrl);
+  };
 
   return (
     <div
@@ -27,32 +35,106 @@ const EffectImageBlock = () => {
         border: "2px solid",
         borderRadius: "xl",
         padding: "4",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "auto",
         sm: {
           width: "1/2",
         },
       })}
     >
-      <h2 className={css({ fontSize: "2xl" })}>オリジナル画像</h2>
-      <div {...getRootProps()}>
+      <h2 className={css({
+          fontSize: "2xl",
+          marginBottom: "20px",
+          marginTop: "10px",
+          maxWidth: "400px",
+          maxHeight: "400px",
+        })}>オリジナル画像</h2>
+      <div {...getRootProps()} className={css({
+          width: "95%",
+          paddingTop: "95%",
+          position: "relative",
+          borderRadius: "xl",
+          backgroundColor: "black",
+          overflow: "hidden",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        })}>
         <input {...getInputProps()} />
         <img
-          src={
-            acceptedFiles[0]
-              ? URL.createObjectURL(acceptedFiles[0])
-              : "https://pub-ff76be015fe2485bb8d12628f4d70b12.r2.dev/upload.png"
-          }
+          src={imageSrc}
           className={css({
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            maxWidth: "100%",
+            maxHeight: "100%",
+            objectFit: "contain",
             borderRadius: "xl",
-            width: "full",
-            maxWidth: "400px",
+            cursor: "pointer",
           })}
         />
-        {isDragActive ? (
-          <p>ファイルを受け付け中</p>
-        ) : (
-          <p>ファイルをドラッグするか、選択してください。</p>
-        )}
       </div>
+          {imageSrc !== defaultImageUrl ? (
+        <>
+          <button
+            onClick={handleRemoveFile}
+            className={css({
+              backgroundColor: "black",
+              color: "white",
+              padding: "2",
+              fontSize: "lg",
+              borderRadius: "md",
+              cursor: "pointer",
+              width: "95%",
+              marginTop: "2",
+              objectFit: "contain",
+              objectPosition: "center",
+            })}
+          >
+            <Trash size={25} className={css({
+              width: "100%",
+            })}/>
+          </button>
+          <button
+            {...getRootProps()}
+            className={css({
+              backgroundColor: "#1e88e5",
+              color: "white",
+              padding: "2",
+              fontSize: "lg",
+              borderRadius: "md",
+              cursor: "pointer",
+              width: "95%",
+              marginTop: "2",
+              objectFit: "contain",
+              objectPosition: "center",
+            })}
+          >
+            <Reload size={25}className={css({
+              width: "100%",
+            })}/>
+          </button>
+        </>
+      ) : (
+        <div
+          className={css({
+            width: "auto",
+            height: "82px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "lg",
+            color: "gray.600",
+            textAlign: "center",
+            marginTop: "4",
+          })}
+        >
+          ファイルをドラッグするか、選択してください。
+        </div>
+      )}
     </div>
   );
 };

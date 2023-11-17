@@ -79,7 +79,7 @@ const Index = () => {
           <EffectImageBlock />
           <OriginalImageBlock />
         </div>
-        <div
+        {/* <div
           className={css({
             gap: "4",
             display: "flex",
@@ -106,7 +106,7 @@ const Index = () => {
               画像をアップロードした後に カメラから表情を撮影してね
             </p>
           </div>
-        </div>
+        </div> */}
         <div
           className={css({
             gap: "4",
@@ -115,7 +115,6 @@ const Index = () => {
             justifyContent: "center",
             flexDirection: "column",
             backgroundColor: "gray.1",
-            border: "2px solid",
             borderRadius: "lg",
             padding: "2",
             width: "10/12",
@@ -128,7 +127,14 @@ const Index = () => {
               height: "0",
             })}
           />
-          <Button onClick={onClickButton}>アップロード</Button>
+          <Button
+            onClick={onClickButton}
+            className={css({
+              borderRadius: '9999px',
+            })}
+          >
+            アップロード
+          </Button>
           {
             // ミューテーションの結果を表示
             result.data?.process_image?.url ? (
