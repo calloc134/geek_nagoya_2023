@@ -6,7 +6,7 @@ import { schema } from "./schema";
 const yoga = createYoga({
   schema,
   cors: {
-    origin: "https://geek-nagoya-2023.pages.dev",
+    origin: ["https://geek-nagoya-2023.pages.dev", "http://localhost:5173"],
     credentials: true,
     methods: ["POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
