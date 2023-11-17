@@ -68,7 +68,7 @@ jobs:
 
       # Rewrite task-definition(秘密情報を注入する)
       - name: rewrite task-definition
-        run: sed -i -e s/SED_TARGET_AWS_ACCOUNT_ID/${{ secrets.AWS_ACCOUNT_ID }}/g .aws/ecs/task-definition.json
+        run: sed -i -e s/SED_TARGET_AWS_ACCOUNT_ID/${{ secrets.AWS_ACCOUNT_ID }}/g ../../apps/backend/task-definition.json
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
