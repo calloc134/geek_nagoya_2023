@@ -1,4 +1,4 @@
-import type { GraphQLResolveInfo } from 'graphql';
+import type { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 import type { GraphQLContext } from '../../context';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -14,6 +14,21 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  File: { input: File; output: File; }
+};
+
+export type Mutation = {
+  process_image?: Maybe<ProcessResponse>;
+};
+
+
+export type MutationProcess_ImageArgs = {
+  camera_image?: InputMaybe<Scalars['File']['input']>;
+  original_image?: InputMaybe<Scalars['File']['input']>;
+};
+
+export type ProcessResponse = {
+  url?: Maybe<Scalars['String']['output']>;
 };
 
 export type Query = {
@@ -97,6 +112,9 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  File: ResolverTypeWrapper<Scalars['File']['output']>;
+  Mutation: ResolverTypeWrapper<{}>;
+  ProcessResponse: ResolverTypeWrapper<ProcessResponse>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
   hello_response: ResolverTypeWrapper<Hello_Response>;
@@ -105,9 +123,25 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean']['output'];
+  File: Scalars['File']['output'];
+  Mutation: {};
+  ProcessResponse: ProcessResponse;
   Query: {};
   String: Scalars['String']['output'];
   hello_response: Hello_Response;
+};
+
+export interface FileScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['File'], any> {
+  name: 'File';
+}
+
+export type MutationResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  process_image?: Resolver<Maybe<ResolversTypes['ProcessResponse']>, ParentType, ContextType, Partial<MutationProcess_ImageArgs>>;
+};
+
+export type ProcessResponseResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['ProcessResponse'] = ResolversParentTypes['ProcessResponse']> = {
+  url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type QueryResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
@@ -121,6 +155,9 @@ export type Hello_ResponseResolvers<ContextType = GraphQLContext, ParentType ext
 };
 
 export type Resolvers<ContextType = GraphQLContext> = {
+  File?: GraphQLScalarType;
+  Mutation?: MutationResolvers<ContextType>;
+  ProcessResponse?: ProcessResponseResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   hello_response?: Hello_ResponseResolvers<ContextType>;
 };
