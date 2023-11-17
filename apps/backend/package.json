@@ -15,6 +15,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/form-data": "^2.5.0",
+    "@types/node-fetch": "^2.6.9",
+    "@types/uuid": "^9.0.7",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.2.2"
   },

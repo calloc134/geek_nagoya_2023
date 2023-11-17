@@ -1,10 +1,10 @@
 import { v4 as uuidv4 } from "uuid";
 // gpt4vを用いて画像を認識する
 import OpenAI from "openai";
-import Jimp from "jimp";
+import { read, MIME_PNG } from "jimp";
 import fetch from "node-fetch";
+// @ts-expect-error form-dataの型定義がないので
 import FormData from "form-data";
-import fs from "node:fs";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import {
   openai_apiKey,
@@ -74,7 +74,7 @@ const img2img = async (prompt: string, file: File) => {
   const fileArrayBuffer = await file.arrayBuffer();
 
   // 画像の読み込み
-  const image_original = await Jimp.read(Buffer.from(fileArrayBuffer));
+  const image_original = await read(Buffer.from(fileArrayBuffer));
 
   // 画像のリサイズ
   image_original.cover(1024, 1024);
@@ -86,10 +86,7 @@ const img2img = async (prompt: string, file: File) => {
   if (!apiKey) throw new Error("Missing Stability API key.");
 
   const formData = new FormData();
-  formData.append(
-    "init_image",
-    await image_original.getBufferAsync(Jimp.MIME_PNG)
-  );
+  formData.append("init_image", await image_original.getBufferAsync(MIME_PNG));
   formData.append("init_image_mode", "IMAGE_STRENGTH");
   formData.append("image_strength", 0.2);
   formData.append("text_prompts[0][text]", prompt);
