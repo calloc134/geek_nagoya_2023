@@ -2,8 +2,8 @@
   "name": "backend-yoga",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "type": "commonjs",
+  "main": "src/index.ts",
+  "type": "module",
   "scripts": {
     "dev": "NODE_ENV=development tsx watch ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
