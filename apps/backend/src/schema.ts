@@ -32,9 +32,12 @@ const mutation_resolvers: MutationResolvers = {
 
     // 画像を変換する
     const result = await img2img(describe || "perfect", original_image_maybe);
+    console.debug("[🖼] 変換完了");
+    // console.debug("[🖼] 変換結果: ", result);
 
     // s3にアップロードする
     const result_upload = await s3_upload(result);
+    console.debug(`https://pub-ff76be015fe2485bb8d12628f4d70b12.r2.dev/${result_upload.filename}`);
 
     return {
       url: `https://pub-ff76be015fe2485bb8d12628f4d70b12.r2.dev/${result_upload.filename}`,
