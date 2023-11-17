@@ -35,9 +35,9 @@ env:
   ECR_REPOSITORY: geek-nagoya2023 # set this to your Amazon ECR repository name
   ECS_SERVICE: geekNagoya2023-service # set this to your Amazon ECS service name
   ECS_CLUSTER: geekNagoya2023 # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION:
-    ../../apps/backend/task-definition.json # set this to the path to your Amazon ECS task definition
-    # file, e.g. .aws/task-definition.json
+  ECS_TASK_DEFINITION: apps/backend/task-definition.json
+  # set this to the path to your Amazon ECS task definition
+  # file, e.g. .aws/task-definition.json
   CONTAINER_NAME:
     geekNagoya2023-container # set this to the name of the container in the
     # containerDefinitions section of your task definition
@@ -68,7 +68,7 @@ jobs:
 
       # Rewrite task-definition(秘密情報を注入する)
       - name: rewrite task-definition
-        run: sed -i -e s/SED_TARGET_AWS_ACCOUNT_ID/${{ secrets.AWS_ACCOUNT_ID }}/g ../../apps/backend/task-definition.json
+        run: sed -i -e s/SED_TARGET_AWS_ACCOUNT_ID/${{ secrets.AWS_ACCOUNT_ID }}/g apps/backend/task-definition.json
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
