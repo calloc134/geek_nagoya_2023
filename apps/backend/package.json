@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "NODE_ENV=development tsx watch ./src/main.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node-dev --respawn src/main.ts",
+    "start": "node dist/src/main.js",
     "typecheck": "tsc --noEmit",
     "prepare": "graphql-codegen --config codegen.ts",
     "codegen": "graphql-codegen --config codegen.ts",
