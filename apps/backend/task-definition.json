@@ -1,6 +1,7 @@
 {
   "family": "backend-yoga",
   "executionRoleArn": "arn:aws:iam::SED_TARGET_AWS_ACCOUNT_ID:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
   "containerDefinitions": [
     {
       "name": "geekNagoya2023-container",
