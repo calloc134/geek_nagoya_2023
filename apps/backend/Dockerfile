@@ -1,6 +1,7 @@
-FROM mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye
+FROM node:16-alpine
 
-RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
+RUN apk add --no-cache curl && \
+    curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 
 COPY . /app
 WORKDIR /app
