@@ -1,5 +1,3 @@
-import { ImageProvider } from "src/utilities/ImageProvider";
-
 import { EffectImageBlock } from "src/components/EffectmageBlock";
 import { OriginalImageBlock } from "src/components/OriginalImageBlock";
 import { Button } from "src/components/Button";
@@ -9,8 +7,8 @@ import { AfterImageBlock } from "src/components/AftermageBlock";
 import { useMutation } from "urql";
 import { graphql } from "src/lib/generated/gql";
 import { useImageFiles } from "src/utilities/useImageFiles";
-import { useContext } from "react";
-import { ImageContext } from "src/utilities/ImageContext";
+import { Grid } from "react-loader-spinner";
+import { useReward } from "react-rewards";
 
 const UploadImageMutation = graphql(`
   mutation UploadImageMutation($somefile: File, $somefile2: File) {
@@ -25,7 +23,10 @@ const Index = () => {
   const [result, executeMutation] = useMutation(UploadImageMutation);
 
   // コンテキストを使用するため呼び出し
-  const { file1, file2 } = useContext(ImageContext);
+  const { file1, file2 } = useImageFiles();
+
+  // 紙吹雪を表示するためのフックを呼び出し
+  const { reward } = useReward("rewardId", "confetti");
 
   // ボタンを押下した時の処理
   const onClickButton = async () => {
@@ -40,7 +41,7 @@ const Index = () => {
       somefile2: file2,
     });
 
-    console.debug(result.data?.process_image?.url);
+    reward();
   };
 
   return (
@@ -75,8 +76,8 @@ const Index = () => {
             },
           })}
         >
-          <OriginalImageBlock />
           <EffectImageBlock />
+          <OriginalImageBlock />
         </div>
         <div
           className={css({
@@ -120,8 +121,25 @@ const Index = () => {
             width: "10/12",
           })}
         >
+          <span
+            id="rewardId"
+            className={css({
+              width: "full",
+              height: "0",
+            })}
+          />
           <Button onClick={onClickButton}>アップロード</Button>
-          <AfterImageBlock image_url={result.data?.process_image?.url} />
+          {
+            // ミューテーションの結果を表示
+            result.data?.process_image?.url ? (
+              <AfterImageBlock image_url={result.data?.process_image?.url} />
+            ) : null
+          }
+          {result.fetching ? (
+            <div className={css({ margin: "auto" })}>
+              <Grid color="gray.1" height={100} width={100} />
+            </div>
+          ) : null}
         </div>
       </div>
     </div>

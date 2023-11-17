@@ -32,7 +32,7 @@ const EffectImageBlock = () => {
         },
       })}
     >
-      <h2 className={css({ fontSize: "2xl" })}>エフェクト画像</h2>
+      <h2 className={css({ fontSize: "2xl" })}>オリジナル画像</h2>
       <div {...getRootProps()}>
         <input {...getInputProps()} />
         <img
