@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
-    "dev": "NODE_ENV=development tsx watch ./src/main.ts",
+    "dev": "NODE_ENV=development tsx watch ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node dist/src/main.js",
+    "start": "NODE_ENV=production node ./dist/src/index.js",
     "typecheck": "tsc --noEmit",
     "prepare": "graphql-codegen --config codegen.ts",
     "codegen": "graphql-codegen --config codegen.ts",
