@@ -3,7 +3,7 @@
   "executionRoleArn": "arn:aws:iam::SED_TARGET_AWS_ACCOUNT_ID:role/ecsTaskExecutionRole",
   "containerDefinitions": [
     {
-      "name": "backend-yoga-container",
+      "name": "geekNagoya2023-container",
       "image": "SED_TARGET_AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/geekNagoya2023:latest",
       "cpu": 256,
       "memory": 512,
