@@ -1,5 +1,4 @@
 import type { GraphQLResolveInfo } from 'graphql';
-import type { GraphQLContext } from '../../context';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -110,17 +109,17 @@ export type ResolversParentTypes = {
   hello_response: Hello_Response;
 };
 
-export type QueryResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   hello?: Resolver<Maybe<ResolversTypes['hello_response']>, ParentType, ContextType>;
 };
 
-export type Hello_ResponseResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['hello_response'] = ResolversParentTypes['hello_response']> = {
+export type Hello_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['hello_response'] = ResolversParentTypes['hello_response']> = {
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Resolvers<ContextType = GraphQLContext> = {
+export type Resolvers<ContextType = any> = {
   Query?: QueryResolvers<ContextType>;
   hello_response?: Hello_ResponseResolvers<ContextType>;
 };

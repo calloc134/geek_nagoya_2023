@@ -1,5 +1,5 @@
-import { createSchema } from "graphql-yoga";
 import { loadFilesSync } from "@graphql-tools/load-files";
+import { createSchema } from "graphql-yoga";
 import { QueryResolvers } from "./lib/generated/resolver-types";
 
 const query_resolvers: QueryResolvers = {
@@ -12,7 +12,7 @@ const query_resolvers: QueryResolvers = {
 };
 
 export const schema = createSchema({
-  typeDefs: [loadFilesSync("../../schema.graphql")],
+  typeDefs: [loadFilesSync("/app/schema.graphql")],
   resolvers: {
     Query: query_resolvers,
   },
