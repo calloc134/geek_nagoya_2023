@@ -2,7 +2,8 @@ import { Provider, createClient, fetchExchange, cacheExchange } from "urql";
 import { devtoolsExchange } from "@urql/devtools";
 
 const client = createClient({
-  url: "http://localhost:6173/api/graphql",
+  // 即席GraphQLサーバー
+  url: "http://geek2023nagoya.f5.si:6173/api/graphql",
   exchanges: [cacheExchange, fetchExchange, devtoolsExchange],
 });
 
