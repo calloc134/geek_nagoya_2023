@@ -4,6 +4,7 @@ import { css } from "./lib/styled-system/css";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { Camera } from "tabler-icons-react";
 import { Link } from "@tanstack/react-router";
+import { Toaster } from "react-hot-toast";
 import HelpButton from "./components/ExplainButton";
 
 const Document = () => {
@@ -69,6 +70,7 @@ const Document = () => {
         </div>
       </div>
       <TanStackRouterDevtools />
+      <Toaster />
     </div>
   );
 };

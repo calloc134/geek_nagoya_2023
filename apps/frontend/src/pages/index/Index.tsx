@@ -9,6 +9,7 @@ import { graphql } from "src/lib/generated/gql";
 import { useImageFiles } from "src/utilities/useImageFiles";
 import { Grid } from "react-loader-spinner";
 import { useReward } from "react-rewards";
+import { toast } from "react-hot-toast";
 
 const UploadImageMutation = graphql(`
   mutation UploadImageMutation($somefile: File, $somefile2: File) {
@@ -32,7 +33,7 @@ const Index = () => {
   const onClickButton = async () => {
     console.debug("onClickButton");
     if (file1 == null || file2 == null) {
-      console.debug("ファイルが選択されていません");
+      toast.error("画像をアップロードしてください");
       return;
     }
     // ミューテーションを実行
@@ -41,6 +42,7 @@ const Index = () => {
       somefile2: file2,
     });
 
+    toast.success("画像をアップロードしました");
     reward();
   };
 
