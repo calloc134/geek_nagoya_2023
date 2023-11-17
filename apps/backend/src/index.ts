@@ -16,7 +16,7 @@ const yoga = createYoga({
 // Pass it into a server to hook into request handlers.
 const server = createServer(yoga);
 
-server.listen(6173, () => {
+server.listen(3000, () => {
   console.log("🚀 Server is running");
 });
 
