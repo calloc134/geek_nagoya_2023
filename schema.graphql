@@ -1,3 +1,5 @@
+scalar File
+
 type Query {
   hello: hello_response
 }
@@ -5,4 +7,12 @@ type Query {
 type hello_response {
   url: String
   message: String
+}
+
+type Mutation {
+  process_image(original_image: File, camera_image: File): ProcessResponse
+}
+
+type ProcessResponse {
+  url: String
 }

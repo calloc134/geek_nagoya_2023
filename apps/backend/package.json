@@ -15,16 +15,25 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/form-data": "^2.5.0",
+    "@types/node-fetch": "^2.6.9",
+    "@types/uuid": "^9.0.7",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.451.0",
     "@graphql-codegen/cli": "^5.0.0",
     "@graphql-codegen/typescript": "^4.0.1",
     "@graphql-codegen/typescript-resolvers": "^4.0.1",
     "@graphql-tools/load-files": "^7.0.0",
+    "dotenv": "^16.3.1",
     "graphql": "^16.8.1",
     "graphql-yoga": "^5.0.0",
-    "tsx": "^4.1.2"
+    "jimp": "^0.22.10",
+    "openai": "^4.19.0",
+    "tsx": "^4.1.2",
+    "uuid": "^9.0.1",
+    "wrangler": "^3.15.0"
   }
 }

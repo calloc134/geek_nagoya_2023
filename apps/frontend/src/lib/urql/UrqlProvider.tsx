@@ -1,9 +1,9 @@
-import { Provider, createClient } from "urql";
+import { Provider, createClient, fetchExchange, cacheExchange } from "urql";
 import { devtoolsExchange } from "@urql/devtools";
 
 const client = createClient({
-  url: "http://localhost:4000/graphql",
-  exchanges: [devtoolsExchange],
+  url: "http://localhost:6173/api/graphql",
+  exchanges: [cacheExchange, fetchExchange, devtoolsExchange],
 });
 
 const UrqlProvider = ({ children }: { children: React.ReactNode }) => {

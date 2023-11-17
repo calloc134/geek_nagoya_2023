@@ -8,7 +8,7 @@ export default defineConfig({
   presets: [
     "@pandacss/preset-base",
     createPreset({
-      accentColor: "purple",
+      accentColor: "indigo",
       grayColor: "neutral",
       borderRadius: "sm",
     }),

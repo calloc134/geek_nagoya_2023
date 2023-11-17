@@ -1,3 +1,4 @@
+import { ImageProvider } from "./utilities/ImageProvider";
 import { Outlet } from "@tanstack/react-router";
 import { css } from "./lib/styled-system/css";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
@@ -58,7 +59,9 @@ const Document = () => {
             padding: 4,
           })}
         >
-          <Outlet />
+          <ImageProvider>
+            <Outlet />
+          </ImageProvider>
         </div>
       </div>
       <TanStackRouterDevtools />

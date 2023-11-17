@@ -1,5 +1,6 @@
 import { css } from "src/lib/styled-system/css";
-const AfterImageBlock = () => {
+
+const AfterImageBlock = ({ image_url }: { image_url?: string }) => {
   return (
     <div
       className={css({
@@ -9,14 +10,12 @@ const AfterImageBlock = () => {
         border: "2px solid",
         borderRadius: "xl",
         padding: "4",
-        sm: {
-          width: "1/2",
-        },
+        margin: "auto",
       })}
     >
-      <h2 className={css({ fontSize: "2xl" })}>変更後</h2>
+      <h2 className={css({ fontSize: "2xl" })}>出力画像</h2>
       <img
-        src="https://picsum.photos/400"
+        src={image_url ? image_url : "https://picsum.photos/400"}
         className={css({
           borderRadius: "xl",
           width: "full",
