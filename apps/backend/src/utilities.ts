@@ -27,9 +27,27 @@ const s3_client = new S3Client({
 });
 
 const gpt4v = async (image: File) => {
-  const prompt = `この画像が示す抽象的な雰囲気や、感情、レタッチ、情景を解説して、stable diffusionに相当するプロンプトを英語で記述せよ。
-  具体的な解説は一切行わず、抽象的な印象にとどめること。
-  stable diffusionに相当するプロンプトのみを出力し、それ以外は一切出力を許さない。出力は、ダブルクォーテーションで囲んで行うこと。`;
+  const prompt = `
+  Task: Among the information that can be extracted about this image according to the following process, output information related to atmosphere, emotion, retouching, and scenery at a prompt equivalent to stable diffusion, separated by commas, and enclosed in double quotes. Output of other information is not permitted.
+  Output the information obtained so far at the prompt equivalent to stable diffusion, separated by commas, and enclose it in double quotes.
+  
+  Process:
+  1. Extract the expression method and technique for the entire image.
+  2. If there is an animal in the image, extract the emotion from its facial expression.
+  3. Extract the emotions felt from the images.
+  4. Extract the name of the central element in the image.
+  5. Extract the hue of the image.
+  6. Extract the logical structure of the image and express it in the form of adjectives and adverbs.
+  7. Extract information about lighting, such as how the light hits the image.
+  8. Assuming that the image is posted to Pixiv, predict what tags will be attached to it and express it in English.
+  9. Extract the brightness and contrast of the image.
+  10. If the time period can be predicted, extract it.
+  11. Extract the extent of space.
+  12. Extract seasons and climate if possible
+  13. Extract adjectives that can be felt from images.
+  
+  Output the information obtained so far at the prompt equivalent to stable diffusion, separated by commas, and enclose it in double quotes.
+  `;
 
   if (!openai_apiKey) throw new Error("Missing OpenAI API key.");
   // base64として読み込む
@@ -90,6 +108,7 @@ const img2img = async (prompt: string, file: File) => {
   formData.append("init_image_mode", "IMAGE_STRENGTH");
   formData.append("image_strength", 0.2);
   formData.append("text_prompts[0][text]", prompt);
+  formData.append("text_prompts[0][weight]", 0.8,);
   formData.append("cfg_scale", 9);
   formData.append("samples", 1);
   formData.append("steps", 30);
