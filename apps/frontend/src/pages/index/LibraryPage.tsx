@@ -1,4 +1,4 @@
-import ImageGallery from "src/components/ImageGallery";
+import { ImageGallery } from "src/components/ImageGallery";
 
 
 const LibraryPage = () => {
