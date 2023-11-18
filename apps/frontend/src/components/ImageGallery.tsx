@@ -126,4 +126,4 @@ const ImageGallery = () => {
   );
 };
 
-export default ImageGallery;
+export { ImageGallery };
