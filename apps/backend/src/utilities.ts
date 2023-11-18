@@ -28,25 +28,27 @@ const s3_client = new S3Client({
 
 const gpt4v = async (image: File) => {
   const prompt = `
-  Task: Among the information that can be extracted about this image according to the following process, output information related to atmosphere, emotion, retouching, and scenery at a prompt equivalent to stable diffusion, separated by commas, and enclosed in double quotes. Output of other information is not permitted.
-  Output the information obtained so far at the prompt equivalent to stable diffusion, separated by commas, and enclose it in double quotes.
+  タスク: この画像について，以下のプロセスに従って抽出できる情報のうち，雰囲気や感情，レタッチ，情景に関するものをstable diffusionに相当するプロンプトで,カンマ区切りで出力し，それをダブルクォーテーションで囲むこと。それ以外の情報の出力は許可しない．
+  これまでに得られた情報をstable diffusionに相当するプロンプトで,カンマ区切りで出力すること．
   
-  Process:
-  1. Extract the expression method and technique for the entire image.
-  2. If there is an animal in the image, extract the emotion from its facial expression.
-  3. Extract the emotions felt from the images.
-  4. Extract the name of the central element in the image.
-  5. Extract the hue of the image.
-  6. Extract the logical structure of the image and express it in the form of adjectives and adverbs.
-  7. Extract information about lighting, such as how the light hits the image.
-  8. Assuming that the image is posted to Pixiv, predict what tags will be attached to it and express it in English.
-  9. Extract the brightness and contrast of the image.
-  10. If the time period can be predicted, extract it.
-  11. Extract the extent of space.
-  12. Extract seasons and climate if possible
-  13. Extract adjectives that can be felt from images.
+  プロセス: 
+  1. 画像の映っているものの名称を抽出する
+  1. 画像の映っているものの名称を抽出する
+  2. 画像全体の表現方法，技法を抽出する．
+  3. 画像内に動物がいた場合，その表情から感情を抽出する．
+  4. 画像から感じられる感情について抽出する．
+  5. 画像のうち，中心となる要素の名称を抽出する．
+  6. 画像の色合いを抽出する．
+  7. 画像の論理構造を抽出し，形容詞，副詞の形で表現する．
+  8. 画像内の光のあたり方などライティングに関する情報を抽出する．
+  9. 画像がPixivに投稿されると仮定した場合，どのようなタグがつけられるかを予測し，英語で表す．
+  10. 画像の明るさやコントラストを抽出する．
+  11. 時間帯を予測できる場合，抽出する．
+  12. 空間の広がりを抽出する．
+  13. もし可能なら，季節や気候を抽出する
+  14. 画像から感じられる形容詞を抽出する．
   
-  Output the information obtained so far at the prompt equivalent to stable diffusion, separated by commas, and enclose it in double quotes.
+  これまでに得られた情報をstable diffusionに相当するプロンプトで,カンマ区切りで出力すること．
   `;
 
   if (!openai_apiKey) throw new Error("Missing OpenAI API key.");
@@ -108,7 +110,7 @@ const img2img = async (prompt: string, file: File) => {
   formData.append("init_image_mode", "IMAGE_STRENGTH");
   formData.append("image_strength", 0.2);
   formData.append("text_prompts[0][text]", prompt);
-  formData.append("text_prompts[0][weight]", 0.8,);
+  formData.append("text_prompts[0][weight]", 0.7);
   formData.append("cfg_scale", 9);
   formData.append("samples", 1);
   formData.append("steps", 30);
