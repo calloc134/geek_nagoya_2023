@@ -26,7 +26,7 @@ const Document = () => {
           property="og:description"
           content="型破りで変幻自在な画像加工アプリ"
         />
-        <meta property="og:image" content="src/photosista_ogp.png" />
+        <meta property="og:image" content="photosista_ogp.png" />
       </Helmet>
 
       <div
