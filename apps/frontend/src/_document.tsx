@@ -4,6 +4,7 @@ import { css } from "./lib/styled-system/css";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { Link } from "@tanstack/react-router";
 import { Toaster } from "react-hot-toast";
+import { Helmet } from "react-helmet";
 import HelpButton from "./components/ExplainButton";
 
 const Document = () => {
@@ -18,6 +19,16 @@ const Document = () => {
         bg: "gray.2",
       })}
     >
+      <Helmet>
+        <title>Photosista</title>
+        <meta property="og:title" content="Photosista" />
+        <meta
+          property="og:description"
+          content="型破りで変幻自在な画像加工アプリ"
+        />
+        <meta property="og:image" content="src/photosista_ogp.png" />
+      </Helmet>
+
       <div
         className={css({
           // display: "flex",
