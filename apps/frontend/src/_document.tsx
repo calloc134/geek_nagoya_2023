@@ -2,7 +2,6 @@ import { ImageProvider } from "./utilities/ImageProvider";
 import { Outlet } from "@tanstack/react-router";
 import { css } from "./lib/styled-system/css";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
-import { Camera } from "tabler-icons-react";
 import { Link } from "@tanstack/react-router";
 import { Toaster } from "react-hot-toast";
 import HelpButton from "./components/ExplainButton";
@@ -37,12 +36,6 @@ const Document = () => {
             shadow: "lg",
           })}
         >
-          <Camera
-            size={32}
-            className={css({
-              color: "gray.1",
-            })}
-          />
           <Link
             to="/"
             className={css({
@@ -50,11 +43,18 @@ const Document = () => {
               color: "gray.1",
             })}
           >
-            もさふぇいす
+            <img
+              src="/photosista_2.png"
+              alt="photosista"
+              className={css({
+                height: "3em",
+                width: "auto",
+              })}
+            />
           </Link>
-            <div className={css({ marginLeft: 'auto', paddingRight: '10px' })}>
-              <HelpButton />
-            </div>
+          <div className={css({ marginLeft: "auto", paddingRight: "10px" })}>
+            <HelpButton />
+          </div>
         </div>
         <div
           className={css({
