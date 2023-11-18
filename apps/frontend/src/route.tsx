@@ -2,7 +2,8 @@ import { RootRoute, Route, Router } from "@tanstack/react-router";
 import { Document } from "./_document";
 import { Index } from "./pages/index/Index";
 import { NotFound } from "./pages/index/NotFound";
-import { LibraryPage } from "./pages/index/libraryPage";
+import { LibraryPage } from "./pages/index/LibraryPage";
+
 
 const root_route = new RootRoute({
   component: () => <Document />,
