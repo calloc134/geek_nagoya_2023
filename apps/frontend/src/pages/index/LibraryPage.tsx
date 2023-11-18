@@ -1,10 +1,11 @@
-import ImageGallery from "src/components/ImageGallary"
+import ImageGallery from "src/components/ImageGallery";
+
 
 const LibraryPage = () => {
   return(
     <>
       <h1 style={{
-        textAlign: 'center', 
+        textAlign: 'center',
         color: '#333',
         fontFamily: 'Arial, sans-serif',
         fontSize: '2.5rem',

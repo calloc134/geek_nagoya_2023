@@ -40,4 +40,4 @@ declare module "@tanstack/react-router" {
   }
 }
 
-export { router,image_route };
+export { router };
