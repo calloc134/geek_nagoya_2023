@@ -2,9 +2,9 @@ import { v4 as uuidv4 } from "uuid";
 // gpt4vを用いて画像を認識する
 import OpenAI from "openai";
 import { read, MIME_PNG } from "jimp";
-import fetch from "node-fetch";
+import { ofetch as fetch } from "ofetch";
 // @ts-expect-error form-dataの型定義がないので
-import FormData from "form-data";
+import FormData from "formdata-node";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import {
   openai_apiKey,
