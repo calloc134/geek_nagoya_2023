@@ -10,8 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node dist/index.js",
     "typecheck": "tsc --noEmit",
-    "prepare": "graphql-codegen --config codegen.ts",
-    "codegen": "graphql-codegen --config codegen.ts"
+    "prepare": "cp ../../schema.graphql ./ && graphql-codegen --config codegen.ts",
+    "codegen": "cp ../../schema.graphql ./ && graphql-codegen --config codegen.ts"
   },
   "keywords": [],
   "author": "",
