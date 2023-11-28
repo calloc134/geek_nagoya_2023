@@ -1,7 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
 // gpt4vを用いて画像を認識する
 import OpenAI from "openai";
-import { read, MIME_PNG } from "jimp";
+import pkg from "jimp";
+const { read, MIME_PNG } = pkg;
 import fetch from "node-fetch";
 // @ts-expect-error form-dataの型定義がないので
 import FormData from "form-data";
