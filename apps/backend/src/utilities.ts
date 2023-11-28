@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 // gpt4vを用いて画像を認識する
 import OpenAI from "openai";
+// @ts-expect-error
 import pkg from "jimp";
 const { read, MIME_PNG } = pkg;
 import fetch from "node-fetch";
